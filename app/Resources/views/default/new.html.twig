@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>New Book</h1>
+
+                {{ form_start(bookForm) }}
+                    {{ form_widget(bookForm) }}
+
+                    <button type="submit" class="btn btn-primary">Add</button>
+                {{ form_end(bookForm) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

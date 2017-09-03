@@ -86,6 +86,14 @@ class Book
     }
 
     /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getAuthors()
+    {
+        return $this->authors;
+    }
+
+    /**
      * @param mixed $status
      */
     public function setStatus($status)
@@ -94,10 +102,26 @@ class Book
     }
 
     /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
+     * @param mixed $title
      */
-    public function getAuthors()
+    public function setTitle($title)
     {
-        return $this->authors;
+        $this->title = $title;
+    }
+
+    /**
+     * @param mixed $year
+     */
+    public function setYear($year)
+    {
+        $this->year = $year;
+    }
+
+    /**
+     * @param ArrayCollection $authors
+     */
+    public function setAuthors($authors)
+    {
+        $this->authors = $authors;
     }
 }

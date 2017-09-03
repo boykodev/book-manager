@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Form\BookFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,11 +29,26 @@ class DefaultController extends Controller
      */
     public function newAction(Request $request)
     {
-        // TODO form
+        $workflow = $this->get('workflow.book_status');
+        $form = $this->createForm(BookFormType::class, null, [
+            'workflow' => $workflow
+        ]);
+
+        // process POST request
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $book = $form->getData();
+
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($book);
+            $manager->flush();
+
+            return $this->redirectToRoute('homepage');
+        }
 
         // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+        return $this->render('default/new.html.twig', [
+            'bookForm' => $form->createView()
         ]);
     }
 }
