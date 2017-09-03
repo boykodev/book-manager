@@ -47,6 +47,30 @@ class Book
     /**
      * @return mixed
      */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getYear()
+    {
+        return $this->year;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getStatus()
     {
         return $this->status;
