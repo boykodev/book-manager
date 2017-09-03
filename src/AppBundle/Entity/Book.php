@@ -4,6 +4,7 @@
 namespace AppBundle\Entity;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,6 +16,7 @@ class Book
     public function __construct()
     {
         $this->createdAt= new \DateTime();
+        $this->authors = new ArrayCollection();
     }
 
     /**
@@ -45,7 +47,14 @@ class Book
     private $status;
 
     /**
-     * @return mixed
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Author", inversedBy="books")
+     */
+    private $authors;
+
+    /**
+     * @return string
      */
     public function getTitle()
     {
@@ -84,5 +93,11 @@ class Book
         $this->status = $status;
     }
 
-
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getAuthors()
+    {
+        return $this->authors;
+    }
 }

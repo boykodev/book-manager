@@ -9,7 +9,7 @@
         <thead>
         <tr>
             <th>Title</th>
-            <th>Author</th>
+            <th>Author(s)</th>
             <th>Year</th>
             <th>Created</th>
             <th>Status</th>
@@ -19,7 +19,13 @@
         {% for book in books %}
             <tr>
                 <td>{{ book.title }}</td>
-                <td>TODO author</td>
+                <td>
+                    <ul>
+                    {% for authors in book.authors.values %}
+                        <li>{{ authors.name|e }}</li>
+                    {% endfor %}
+                    </ul>
+                </td>
                 <td>{{ book.year }}</td>
                 <td>{{ book.createdAt|date('Y-m-d') }}</td>
                 <td>{{ book.status }}</td>
