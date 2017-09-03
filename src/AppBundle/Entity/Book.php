@@ -3,7 +3,7 @@
 
 namespace AppBundle\Entity;
 
-
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -32,7 +32,7 @@ class Book
     private $title;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="integer")
      */
     private $year;
 
@@ -78,11 +78,21 @@ class Book
     }
 
     /**
-     * @return mixed
+     * @Assert\Choice(callback="getStatuses")
      */
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Get array of available choices for book status
+     *
+     * @return array
+     */
+    public static function getStatuses()
+    {
+        return array('free', 'reserved', 'taken');
     }
 
     /**

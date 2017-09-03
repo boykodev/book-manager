@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Book;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -11,14 +12,14 @@ class BookFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $places = $options['workflow']->getDefinition()->getPlaces();
+        $statuses = Book::getStatuses();
 
         $builder
             ->add('title')
             ->add('year')
             ->add('authors')
             ->add('status', ChoiceType::class, [
-                'choices'  => $places,
+                'choices'  => array_combine($statuses, $statuses),
             ]);
     }
 

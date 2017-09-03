@@ -29,10 +29,7 @@ class DefaultController extends Controller
      */
     public function newAction(Request $request)
     {
-        $workflow = $this->get('workflow.book_status');
-        $form = $this->createForm(BookFormType::class, null, [
-            'workflow' => $workflow
-        ]);
+        $form = $this->createForm(BookFormType::class);
 
         // process POST request
         $form->handleRequest($request);
