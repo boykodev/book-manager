@@ -12,6 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Book
 {
+    public function __construct()
+    {
+        $this->createdAt= new \DateTime();
+    }
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -22,7 +27,7 @@ class Book
     /**
      * @ORM\Column(type="string")
      */
-    private $name;
+    private $title;
 
     /**
      * @ORM\Column(type="string")
@@ -30,12 +35,30 @@ class Book
     private $year;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="datetime")
      */
-    private $date;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="string")
      */
     private $status;
+
+    /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param mixed $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+
 }

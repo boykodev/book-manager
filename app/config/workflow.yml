@@ -1,0 +1,30 @@
+framework:
+    workflows:
+        book_status:
+            type: 'workflow'
+            marking_store:
+                type: 'single_state'
+                arguments:
+                    - 'status'
+            supports:
+                - AppBundle\Entity\Book
+            places:
+                - free
+                - reserved
+                - taken
+            transitions:
+                free_taken:
+                    from: free
+                    to:   taken
+                free_reserved:
+                    from: free
+                    to:   reserved
+                reserved_free:
+                    from: reserved
+                    to:   free
+                reserved_taken:
+                    from: reserved
+                    to:   taken
+                taken_free:
+                    from: taken
+                    to:   free
