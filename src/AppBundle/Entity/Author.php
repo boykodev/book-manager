@@ -3,10 +3,11 @@
 
 namespace AppBundle\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Doctrine entity for book authors
+ *
  * @ORM\Entity
  * @ORM\Table(name="author")
  */

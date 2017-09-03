@@ -1,32 +1,47 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Author(s)</th>
-            <th>Year</th>
-            <th>Created</th>
-            <th>Status</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for book in books %}
-            <tr>
-                <td>{{ book.title }}</td>
-                <td>
-                    <ul>
-                    {% for authors in book.authors.values %}
-                        <li>{{ authors.name|e }}</li>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author(s)</th>
+                        <th>Year</th>
+                        <th>Created</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for book in books %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('book_show', {
+                                    'book_id': book.id
+                                }) }}">{{ book.title }}</a>
+                            </td>
+                            <td>
+                                <ul>
+                                    {% for authors in book.authors.values %}
+                                        <li>{{ authors.name|e }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                            <td>{{ book.year }}</td>
+                            <td>{{ book.createdAt|date('Y-m-d') }}</td>
+                            <td>{{ book.status }}</td>
+                        </tr>
                     {% endfor %}
-                    </ul>
-                </td>
-                <td>{{ book.year }}</td>
-                <td>{{ book.createdAt|date('Y-m-d') }}</td>
-                <td>{{ book.status }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <a href="{{ path('book_new') }}"><button type="button" class="btn btn-primary">Add new book</button></a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Doctrine entity for books
+ *
  * @ORM\Entity
  * @ORM\Table(name="book")
  */
@@ -54,6 +56,14 @@ class Book
     private $authors;
 
     /**
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * @return string
      */
     public function getTitle()
@@ -62,7 +72,7 @@ class Book
     }
 
     /**
-     * @return mixed
+     * @return integer
      */
     public function getYear()
     {
