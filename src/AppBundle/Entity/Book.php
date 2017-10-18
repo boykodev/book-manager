@@ -3,6 +3,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Validator\Constraints as BookAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -29,11 +30,14 @@ class Book
     private $id;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
     private $title;
 
     /**
+     * @Assert\NotBlank()
+     * @BookAssert\Year()
      * @ORM\Column(type="integer")
      */
     private $year;
