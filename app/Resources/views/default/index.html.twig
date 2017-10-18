@@ -12,6 +12,7 @@
                         <th>Year</th>
                         <th>Created</th>
                         <th>Status</th>
+                        <th>Edit</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -32,6 +33,11 @@
                             <td>{{ book.year }}</td>
                             <td>{{ book.createdAt|date('Y-m-d') }}</td>
                             <td>{{ book.status }}</td>
+                            <td>
+                                <a href="{{ path('book_edit', {'id': book.id}) }}">
+                                    <i class="fa fa-edit fa-lg"></i>
+                                </a>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
