@@ -17,7 +17,7 @@ class Book
 {
     public function __construct()
     {
-        $this->createdAt= new \DateTime();
+        $this->createdAt = new \DateTime();
         $this->authors = new ArrayCollection();
     }
 
@@ -52,6 +52,7 @@ class Book
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Author", inversedBy="books")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $authors;
 
