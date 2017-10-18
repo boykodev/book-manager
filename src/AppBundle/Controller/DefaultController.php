@@ -2,7 +2,6 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Form\BookFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -26,36 +25,13 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/new", name="book_new")
-     */
-    public function newAction(Request $request)
-    {
-        $form = $this->createForm(BookFormType::class);
-
-        // process POST request
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $book = $form->getData();
-
-            $manager = $this->getDoctrine()->getManager();
-            $manager->persist($book);
-            $manager->flush();
-
-            return $this->redirectToRoute('homepage');
-        }
-
-        return $this->render('default/new.html.twig', [
-            'bookForm' => $form->createView()
-        ]);
-    }
-
-    /**
      * @Route("/book/{book_id}", name="book_show")
      */
-    public function showAction($book_id, Request $request) {
+    public function showAction($book_id, Request $request)
+    {
         $manager = $this->getDoctrine()->getManager();
-        $book = $manager // get the book by id
-            ->getRepository('AppBundle:Book')
+        $book = $manager// get the book by id
+        ->getRepository('AppBundle:Book')
             ->find($book_id);
 
         // get available transitions with Workflow
