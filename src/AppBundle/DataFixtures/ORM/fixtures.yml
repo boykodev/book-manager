@@ -1,0 +1,11 @@
+AppBundle\Entity\Book:
+    book_{1..10}:
+      title: <sentence(3)>
+      year: <year()>
+      createdAt: <dateTimeBetween('-6 months', 'now')>
+      status: <status()>
+      authors: ['@authors_*']
+
+AppBundle\Entity\Author:
+    authors_{1..10}:
+        name: <name()>
