@@ -1,3 +1,7 @@
 {{ form_start(bookForm) }}
-    {{ form_widget(bookForm) }}
+    {{ form_row(bookForm.title) }}
+    {{ form_row(bookForm.year) }}
+    {{ form_row(bookForm.authors) }}
+    {{ form_row(bookForm.status) }}
+    {{ form_row(bookForm.submit, {'label': submitLabel}) }}
 {{ form_end(bookForm) }}

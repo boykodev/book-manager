@@ -24,6 +24,9 @@ class AdminController extends Controller
     {
         $form = $this->createForm(BookFormType::class);
 
+        $sm = $this->get('AppBundle\Service\StatusManager');
+        $sm->setAvailableStatuses($form);
+
         // process POST request
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -48,6 +51,9 @@ class AdminController extends Controller
     {
         $form = $this->createForm(BookFormType::class, $book);
 
+        $sm = $this->get('AppBundle\Service\StatusManager');
+        $sm->setAvailableStatuses($form, $book);
+
         // process POST request
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -60,7 +66,7 @@ class AdminController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->render('admin/new.html.twig', [
+        return $this->render('admin/edit.html.twig', [
             'bookForm' => $form->createView()
         ]);
     }

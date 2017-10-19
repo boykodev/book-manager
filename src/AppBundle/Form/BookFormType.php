@@ -19,20 +19,14 @@ class BookFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $statuses = Book::getStatuses();
-
         $builder
             ->add('title')
             ->add('year')
             ->add('authors')
-            ->add('status', ChoiceType::class, [
-                'choices' => array_combine($statuses, $statuses),
-            ])
-            ->add('add', SubmitType::class, [
-                'label' => "Add",
+            ->add('status', ChoiceType::class)
+            ->add('submit', SubmitType::class, [
                 'attr' => array('class' => 'btn btn-primary')
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
