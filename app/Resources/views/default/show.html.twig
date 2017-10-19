@@ -4,39 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Author(s)</th>
-                        <th>Year</th>
-                        <th>Created</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>{{ book.title }}</td>
-                        <td>
-                            <ul>
-                                {% for authors in book.authors.values %}
-                                    <li>{{ authors.name|e }}</li>
-                                {% endfor %}
-                            </ul>
-                        </td>
-                        <td>{{ book.year }}</td>
-                        <td>{{ book.createdAt|date('Y-m-d') }}</td>
-                        <td>{{ book.status }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
-                {{ form_start(statusForm) }}
-                {{ form_widget(statusForm) }}
-                {{ form_end(statusForm) }}
+                {{ include('default/_table.html.twig', {'books': [book]}) }}
             </div>
         </div>
     </div>

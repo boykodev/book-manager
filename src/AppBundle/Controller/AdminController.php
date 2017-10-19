@@ -36,7 +36,7 @@ class AdminController extends Controller
             $manager->persist($book);
             $manager->flush();
 
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('book_show', ['id' => $book->getId()]);
         }
 
         return $this->render('admin/new.html.twig', [
@@ -63,7 +63,7 @@ class AdminController extends Controller
             $manager->persist($book);
             $manager->flush();
 
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('book_show', ['id' => $book->getId()]);
         }
 
         return $this->render('admin/edit.html.twig', [

@@ -4,44 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Author(s)</th>
-                        <th>Year</th>
-                        <th>Created</th>
-                        <th>Status</th>
-                        <th>Edit</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for book in books %}
-                        <tr>
-                            <td>
-                                <a href="{{ path('book_show', {
-                                    'book_id': book.id
-                                }) }}">{{ book.title }}</a>
-                            </td>
-                            <td>
-                                <ul>
-                                    {% for authors in book.authors.values %}
-                                        <li>{{ authors.name|e }}</li>
-                                    {% endfor %}
-                                </ul>
-                            </td>
-                            <td>{{ book.year }}</td>
-                            <td>{{ book.createdAt|date('Y-m-d') }}</td>
-                            <td>{{ book.status }}</td>
-                            <td>
-                                <a href="{{ path('book_edit', {'id': book.id}) }}">
-                                    <i class="fa fa-edit fa-lg"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                {{ include('default/_table.html.twig', {'books': books}) }}
             </div>
         </div>
         <div class="row">
