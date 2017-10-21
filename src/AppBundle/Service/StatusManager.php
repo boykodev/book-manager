@@ -52,4 +52,9 @@ class StatusManager
 
         $form->add($this->field, $fieldType, $options);
     }
+
+    public function statusIsAllowed(string $status, Book $book = null)
+    {
+        return in_array($status, $this->getAvailableStatuses($book));
+    }
 }

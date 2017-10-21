@@ -5,7 +5,6 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Book;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
@@ -25,9 +24,9 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/book/{id}", name="book_show")
+     * @Route("/books/{id}", name="book_show")
      */
-    public function showAction(Book $book, Request $request)
+    public function showAction(Book $book)
     {
         return $this->render('default/show.html.twig', [
             'book' => $book
