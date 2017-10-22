@@ -2,6 +2,7 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
+use AppBundle\Entity\Book;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Nelmio\Alice\Fixtures;
@@ -20,17 +21,11 @@ class LoadFixtures implements FixtureInterface
     }
 
     /**
-     * Gives random book status
-     *
-     * @return string
+     * Provides random book status for Alice
      */
-    public function status()
+    public function status() : string
     {
-        $statuses = [
-            'free',
-            'reserved',
-            'taken'
-        ];
+        $statuses = Book::getStatuses();
 
         $key = array_rand($statuses);
 

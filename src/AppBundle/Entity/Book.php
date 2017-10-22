@@ -1,6 +1,5 @@
 <?php
 
-
 namespace AppBundle\Entity;
 
 use AppBundle\Validator\Constraints as BookAssert;
@@ -16,6 +15,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Book
 {
+    const STATUS_FREE = 'free';
+    const STATUS_RESERVED = 'reserved';
+    const STATUS_TAKEN = 'taken';
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -43,51 +46,41 @@ class Book
     private $year;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
+     * @Assert\Choice({"free", "reserved", "taken"})
      * @ORM\Column(type="string")
      */
     private $status;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Author", inversedBy="books")
      * @ORM\JoinColumn(nullable=true)
      */
     private $authors;
 
-    /**
-     * @return integer
-     */
-    public function getId()
+    public function getId() : int
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
-    public function getTitle()
+    public function getTitle() : string
     {
         return $this->title;
     }
 
-    /**
-     * @return integer
-     */
-    public function getYear()
+    public function getYear() : int
     {
         return $this->year;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCreatedAt()
+    public function getCreatedAt() : \DateTime
     {
         return $this->createdAt;
     }
@@ -95,56 +88,43 @@ class Book
     /**
      * @Assert\Choice(callback="getStatuses")
      */
-    public function getStatus()
+    public function getStatus() : string
     {
         return $this->status;
     }
 
     /**
      * Get array of available choices for book status
-     *
-     * @return array
      */
-    public static function getStatuses()
+    public static function getStatuses() : array
     {
-        return array('free', 'reserved', 'taken');
+        return [
+            self::STATUS_FREE,
+            self::STATUS_RESERVED,
+            self::STATUS_TAKEN
+        ];
     }
 
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
     public function getAuthors()
     {
         return $this->authors;
     }
 
-    /**
-     * @param mixed $status
-     */
-    public function setStatus($status)
+    public function setStatus(string $status)
     {
         $this->status = $status;
     }
 
-    /**
-     * @param mixed $title
-     */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
     }
 
-    /**
-     * @param mixed $year
-     */
-    public function setYear($year)
+    public function setYear(int $year)
     {
         $this->year = $year;
     }
 
-    /**
-     * @param ArrayCollection $authors
-     */
     public function setAuthors($authors)
     {
         $this->authors = $authors;

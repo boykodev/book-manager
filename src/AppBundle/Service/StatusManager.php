@@ -6,6 +6,12 @@ use AppBundle\Entity\Book;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Workflow\StateMachine;
 
+/**
+ * Class StatusManager
+ * Service for managing book status
+ *
+ * @package AppBundle\Service
+ */
 class StatusManager
 {
     private $field;
@@ -17,7 +23,13 @@ class StatusManager
         $this->workflow = $workflow;
     }
 
-    public function getAvailableStatuses(Book $book = null)
+    /**
+     * Get available book statuses
+     *
+     * @param Book|null $book
+     * @return array
+     */
+    public function getAvailableStatuses(Book $book = null) : array
     {
         if (!$book) {
             $statuses = Book::getStatuses();
@@ -40,6 +52,12 @@ class StatusManager
         return array_combine($statuses, $statuses);
     }
 
+    /**
+     * Set available statuses as form choices
+     *
+     * @param Form $form
+     * @param Book|null $book
+     */
     public function setAvailableStatuses(Form $form, Book $book = null)
     {
         $field = $form->get($this->field);
@@ -53,7 +71,14 @@ class StatusManager
         $form->add($this->field, $fieldType, $options);
     }
 
-    public function statusIsAllowed(string $status, Book $book = null)
+    /**
+     * Check if book status is allowed
+     *
+     * @param string $status
+     * @param Book|null $book
+     * @return bool
+     */
+    public function statusIsAllowed(string $status, Book $book = null) : bool
     {
         return in_array($status, $this->getAvailableStatuses($book));
     }

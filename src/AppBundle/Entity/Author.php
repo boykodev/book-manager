@@ -1,8 +1,8 @@
 <?php
 
-
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,23 +32,17 @@ class Author
      */
     private $books;
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }
 
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getBooks()
+    public function getBooks() : ArrayCollection
     {
         return $this->books;
     }
 
-    public function __toString()
+    public function __toString() : string
     {
         return $this->getName();
     }

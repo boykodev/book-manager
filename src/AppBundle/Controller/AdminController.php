@@ -18,6 +18,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends Controller
 {
     /**
+     * Create new book action
+     *
      * @Route("/new", name="book_new")
      */
     public function newAction(Request $request)
@@ -45,6 +47,8 @@ class AdminController extends Controller
     }
 
     /**
+     * Edit the book action
+     *
      * @Route("/edit/{id}", name="book_edit")
      */
     public function editAction(Request $request, Book $book)
